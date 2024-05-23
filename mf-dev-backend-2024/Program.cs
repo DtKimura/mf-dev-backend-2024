@@ -1,9 +1,17 @@
+using mf_dev_backend_2024.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // Linha abaixo serve pra aplicar alterações instantaneas na view durante a compilação do sistema
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//1- É criado um modelo de dados, criando uma classe de contexto chamada AppDbContext
+//2- Configurado a string de conexão com o banco de dados no arquivo appsettings.json
+//3- A baixo estamos passando essa configuração por injeção de dependência
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("Default Connection")));
 
 var app = builder.Build();
 
@@ -27,3 +35,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+/// A classe program é reponsáve por configurar o projeto
