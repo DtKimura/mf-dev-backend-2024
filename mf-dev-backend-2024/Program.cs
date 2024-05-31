@@ -9,9 +9,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 //1- É criado um modelo de dados, criando uma classe de contexto chamada AppDbContext
 //2- Configurado a string de conexão com o banco de dados no arquivo appsettings.json
-//3- A baixo estamos passando essa configuração por injeção de dependência
+//3- A baixo estamos passando essa configuração de banco de dados por injeção de dependência
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("Default Connection")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -36,4 +36,4 @@ app.MapControllerRoute(
 
 app.Run();
 
-/// A classe program é reponsáve por configurar o projeto
+/// A classe program é reponsável por configurar o projeto
